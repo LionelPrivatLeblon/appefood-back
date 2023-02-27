@@ -9,6 +9,7 @@ require("./models/connection");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+var recipesRouter = require("./routes/recipes");
 
 var app = express();
 
@@ -21,7 +22,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+//je définis un params à ma route
+app.use('/recipes', recipesRouter)
 
 module.exports = app;
