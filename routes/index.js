@@ -3,11 +3,14 @@ var router = express.Router();
 
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
+
+//attribuer un Id Unique à mon fichier
 const uniqid = require("uniqid");
 
-router.post("/upload", async (req, res) => {
+//route pour upload sur cloudinary
+router.post("/image", async (req, res) => {
   const photoPath = `./tmp/${uniqid()}.jpg`;
-  const resultMove = await req.files.photoFromFront.mv(photoPath);
+  const resultMove = await req.files.photoOfGallery.mv(photoPath);
 
   if (!resultMove) {
     //upload file to permanent storage on cloudinary server
@@ -16,7 +19,7 @@ router.post("/upload", async (req, res) => {
   } else {
     res.json({ result: false, error: resultMove });
   }
-  fs.unlinkSync("./tmp/photo.jpg"); //supprimer le fichier
+  fs.unlinkSync(photoPath); //supprimer le fichier
 });
 
 /* GET home page. */
