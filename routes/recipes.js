@@ -17,7 +17,6 @@ router.get("/", (req, res) => {
   )
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       if (data) {
         res.json({ recipes: data });
       } else {
